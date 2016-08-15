@@ -1,0 +1,17 @@
+#pragma once
+
+//////////////////////////////////////////////////////////////////////////
+// STL includes and definitions.
+//
+
+#include <iostream>
+#include <string>
+#include <sstream>
+
+//////////////////////////////////////////////////////////////////////////
+// Poco includes and definitions.
+//
+
+#include "Poco/Process.h"
+#include "Poco/Path.h"
+#include "Poco/Format.h"

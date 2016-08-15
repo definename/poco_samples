@@ -1,0 +1,231 @@
+<definitions name="TimeService" targetNamespace="http://www.appinf.com/webservices/TimeService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:remoting="http://www.appinf.com/remoting" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ts="http://www.appinf.com/webservices/TimeService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wts="http://www.appinf.com/webservices/TimeService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<types>
+		<xsd:schema targetNamespace="http://www.appinf.com/remoting">
+			<xsd:element name="Exception" type="remoting:Exception"/>
+			<xsd:complexType name="Exception">
+				<xsd:sequence>
+					<xsd:element name="Type" type="xsd:string"/>
+					<xsd:element name="Message" type="xsd:string"/>
+					<xsd:element name="Code" type="xsd:int"/>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.appinf.com/webservices/TimeService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:complexType name="GetLocationRequest"/>
+			<xsd:complexType name="GetLocationReply">
+				<xsd:sequence>
+					<xsd:element name="return" type="ts:LocationDataUnit"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="LocationDataUnit">
+				<xsd:sequence>
+					<xsd:element name="accuracy" type="xsd:float"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="buf" type="xsd:int"/>
+					<xsd:element name="data" type="xsd:string"/>
+					<xsd:element name="internal" type="ts:Internal"/>
+					<xsd:element name="speed" type="xsd:float"/>
+					<xsd:element name="velocity" type="xsd:unsignedInt"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Internal">
+				<xsd:sequence>
+					<xsd:element name="core" type="xsd:int"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TEvent">
+				<xsd:sequence>
+					<xsd:element name="timeEvent" type="xsd:string"/>
+					<xsd:element name="timeStatus" type="xsd:int"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TimeEventRequest">
+				<xsd:sequence>
+					<xsd:element name="timeEvent" type="ts:TEvent"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TimeEventReply"/>
+			<xsd:complexType name="WakeUpRequest">
+				<xsd:sequence>
+					<xsd:element name="time" type="xsd:dateTime"/>
+					<xsd:element name="message" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="WakeUpReply"/>
+			<xsd:complexType name="currentTimeRequest"/>
+			<xsd:complexType name="currentTimeReply">
+				<xsd:sequence>
+					<xsd:element name="return" type="xsd:dateTime"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="GetLocation" type="ts:GetLocationRequest"/>
+			<xsd:element name="GetLocationReply" type="ts:GetLocationReply"/>
+			<xsd:element name="TimeEvent" type="ts:TimeEventRequest"/>
+			<xsd:element name="TimeEventReply" type="ts:TimeEventReply"/>
+			<xsd:element name="WakeUp" type="ts:WakeUpRequest"/>
+			<xsd:element name="WakeUpReply" type="ts:WakeUpReply"/>
+			<xsd:element name="currentTime" type="ts:currentTimeRequest"/>
+			<xsd:element name="currentTimeReply" type="ts:currentTimeReply"/>
+		</xsd:schema>
+	</types>
+	<message name="ExceptionFaultMsg">
+		<part element="remoting:Exception" name="fault"/>
+	</message>
+	<message name="GetLocationRequestMsg">
+		<part element="ts:GetLocation" name="parameters"/>
+	</message>
+	<message name="GetLocationReplyMsg">
+		<part element="ts:GetLocationReply" name="parameters"/>
+	</message>
+	<message name="TimeEventRequestMsg">
+		<part element="ts:TimeEvent" name="parameters"/>
+	</message>
+	<message name="TimeEventReplyMsg">
+		<part element="ts:TimeEventReply" name="parameters"/>
+	</message>
+	<message name="WakeUpRequestMsg">
+		<part element="ts:WakeUp" name="parameters"/>
+	</message>
+	<message name="WakeUpReplyMsg">
+		<part element="ts:WakeUpReply" name="parameters"/>
+	</message>
+	<message name="currentTimeRequestMsg">
+		<part element="ts:currentTime" name="parameters"/>
+	</message>
+	<message name="currentTimeReplyMsg">
+		<part element="ts:currentTimeReply" name="parameters"/>
+	</message>
+	<portType name="TimeService">
+		<operation name="GetLocation">
+			<input message="wts:GetLocationRequestMsg"/>
+			<output message="wts:GetLocationReplyMsg"/>
+			<fault message="wts:ExceptionFaultMsg" name="Exception"/>
+		</operation>
+		<operation name="TimeEvent">
+			<input message="wts:TimeEventRequestMsg"/>
+			<output message="wts:TimeEventReplyMsg"/>
+			<fault message="wts:ExceptionFaultMsg" name="Exception"/>
+		</operation>
+		<operation name="WakeUp">
+			<input message="wts:WakeUpRequestMsg"/>
+			<output message="wts:WakeUpReplyMsg"/>
+			<fault message="wts:ExceptionFaultMsg" name="Exception"/>
+		</operation>
+		<operation name="currentTime">
+			<input message="wts:currentTimeRequestMsg"/>
+			<output message="wts:currentTimeReplyMsg"/>
+			<fault message="wts:ExceptionFaultMsg" name="Exception"/>
+		</operation>
+	</portType>
+	<binding name="TimeServiceSoapBinding" type="wts:TimeService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetLocation">
+			<soap:operation soapAction="http://www.appinf.com/webservices/TimeService/GetLocation" style="document"/>
+			<input>
+				<soap:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="TimeEvent">
+			<soap:operation soapAction="http://www.appinf.com/webservices/TimeService/TimeEvent" style="document"/>
+			<input>
+				<soap:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="WakeUp">
+			<soap:operation soapAction="http://www.appinf.com/webservices/TimeService/WakeUp" style="document"/>
+			<input>
+				<soap:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="currentTime">
+			<soap:operation soapAction="http://www.appinf.com/webservices/TimeService/currentTime" style="document"/>
+			<input>
+				<soap:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	<binding name="TimeServiceSoap12Binding" type="wts:TimeService">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetLocation">
+			<soap12:operation soapAction="http://www.appinf.com/webservices/TimeService/GetLocation" style="document"/>
+			<input>
+				<soap12:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap12:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap12:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="TimeEvent">
+			<soap12:operation soapAction="http://www.appinf.com/webservices/TimeService/TimeEvent" style="document"/>
+			<input>
+				<soap12:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap12:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap12:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="WakeUp">
+			<soap12:operation soapAction="http://www.appinf.com/webservices/TimeService/WakeUp" style="document"/>
+			<input>
+				<soap12:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap12:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap12:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="currentTime">
+			<soap12:operation soapAction="http://www.appinf.com/webservices/TimeService/currentTime" style="document"/>
+			<input>
+				<soap12:body parts="parameters" use="literal"/>
+			</input>
+			<output>
+				<soap12:body parts="parameters" use="literal"/>
+			</output>
+			<fault name="Exception">
+				<soap12:fault name="Exception" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	<service name="TimeService">
+		<port binding="wts:TimeServiceSoapBinding" name="TimeService">
+			<soap:address location="http://localhost:8080/soap/TimeService/TheClock"/>
+		</port>
+	</service>
+	<service name="TimeService12">
+		<port binding="wts:TimeServiceSoap12Binding" name="TimeService12">
+			<soap12:address location="http://localhost:8080/soap/TimeService/TheClock"/>
+		</port>
+	</service>
+</definitions>

@@ -1,0 +1,31 @@
+<AppConfig>
+	<RemoteGen>
+		<files>
+			<include>
+				${POCO_ROOT}/include/Poco/RemotingNG/RemoteObject.h
+				${POCO_ROOT}/include/Poco/RemotingNG/Proxy.h
+				${POCO_ROOT}/include/Poco/RemotingNG/Skeleton.h
+				${SOURCE_DIR}/include/RemotingService.h
+			</include>
+		</files>
+		<output>
+			<include>${OUTPUT_DIR}/include</include>
+			<src>${OUTPUT_DIR}/src</src>
+			<copyright>Copyright (c) 2018-2019, Carrot Farm</copyright>
+			<mode>server</mode>
+		</output>
+		<compiler id="msvc">
+			<exec>cl</exec>
+			<options>
+				/I
+				"${POCO_ROOT}\include"
+				/I
+				"${SOURCE_DIR}\include"
+				/nologo
+				/C
+				/P
+				/TP
+			</options>
+		</compiler>
+	</RemoteGen>
+</AppConfig>

@@ -1,0 +1,16 @@
+#pragma once
+
+//////////////////////////////////////////////////////////////////////////
+// STL includes and definitions.
+//
+
+#include <iostream>
+#include <string>
+
+//////////////////////////////////////////////////////////////////////////
+// Poco includes and definitions.
+//
+
+#include "Poco/Net/HTTPStreamFactory.h"
+#include "Poco/StreamCopier.h"
+#include "Poco/URI.h"

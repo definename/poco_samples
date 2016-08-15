@@ -1,0 +1,17 @@
+#pragma once
+
+#include "targetver.h"
+
+//////////////////////////////////////////////////////////////////////////
+// STL includes and definitions.
+//
+
+#include <iostream>
+#include <string>
+
+//////////////////////////////////////////////////////////////////////////
+// Poco includes and definitions
+//
+
+#include "Poco/Util/Application.h"
+#include "Poco/Optional.h"
