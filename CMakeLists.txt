@@ -275,6 +275,7 @@ add_subdirectory(modules/_thread)
 
 # add_subdirectory(modules/timer)
 add_subdirectory(modules/nobsod)
+add_subdirectory(modules/notification-center)
 # add_subdirectory(modules/optional)
 # add_subdirectory(modules/basic_event)
 # add_subdirectory(modules/memory_managment)
