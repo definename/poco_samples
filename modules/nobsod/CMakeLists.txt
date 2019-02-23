@@ -18,6 +18,8 @@ set(PROJECT_HEADERS
 	include/Resource.h
 	include/NoBSoD.h
 	include/PnpUtilService.h
+	include/Service.h
+	include/ServiceNotification.h
 	)
 set(PROJECT_RESOURCES
 	${CMAKE_CURRENT_BINARY_DIR}/Version.rc
@@ -27,6 +29,7 @@ set(PROJECT_RESOURCES
 	)
 set(PROJECT_SOURCES
 	src/NoBSoD.cpp
+	src/Service.cpp
 	src/PnpUtilService.cpp
 	)
 set(MISC

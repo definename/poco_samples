@@ -28,7 +28,7 @@ private:
 	Poco::Logger& logger_;
 };
 
-class App : public Poco::Util::ServerApplication
+class Main : public Poco::Util::ServerApplication
 {
 protected:
 	int main(const ArgVec& args)
@@ -57,4 +57,4 @@ protected:
 	}
 };
 
-POCO_SERVER_MAIN(App);
+POCO_SERVER_MAIN(Main);

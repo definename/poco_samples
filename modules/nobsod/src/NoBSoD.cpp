@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "NoBSoD.h"
+#include "PnpUtilService.h"
 
 namespace nobsod
 {
@@ -15,15 +16,27 @@ void NoBSoD::initialize(Poco::Util::Application& self)
 	Poco::Util::ServerApplication::initialize(self);
 }
 
+void NoBSoD::uninitialize()
+{
+	for (auto& service : serviceList_)
+	{
+		service->Stop();
+	}
+
+	ServerApplication::uninitialize();
+}
+
 int NoBSoD::main(const Application::ArgVec& args)
 {
 	if (!helpRequested_)
 	{
 		logger().information("Wait for termination request");
-		while (true)
+
+		serviceList_.push_back(new PnpUtilService(logger()));
+
+		for (auto& service : serviceList_)
 		{
-			logger().information("Here is message!!!");
-			Poco::Thread::sleep(1000);
+			service->Start();
 		}
 
 		waitForTerminationRequest();

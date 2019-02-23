@@ -13,3 +13,5 @@
 //
 
 #include "Poco/Util/ServerApplication.h"
+#include "Poco/NotificationQueue.h"
+#include "Poco/Notification.h"

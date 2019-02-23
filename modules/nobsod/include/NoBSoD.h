@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Service.h"
+
 namespace nobsod
 {
 
@@ -18,12 +20,18 @@ public:
 	//! Destructor.
 	~NoBSoD() = default;
 
+protected:
+	//! Service container type.
+	using ServiceList = std::vector<Service::Ptr>;
+
 	//
 	// Protected interface.
 	//
 protected:
 	//! Initializes main application logic.
 	void initialize(Poco::Util::Application& self) override;
+	//! Uninitializes main application.
+	void uninitialize() override;
 	//! The application's main logic.
 	int main(const Application::ArgVec& args) override;
 
@@ -33,6 +41,8 @@ protected:
 protected:
 	//! Help request flag.
 	bool helpRequested_;
+	//! Service list
+	ServiceList serviceList_;
 };
 
 } // namespace nobsod

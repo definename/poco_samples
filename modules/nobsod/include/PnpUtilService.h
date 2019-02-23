@@ -1,22 +1,21 @@
 #pragma once
 
+#include "Service.h"
+
 namespace nobsod
 {
 
-class PnpUtilService : public Poco::Runnable
+class PnpUtilService : public Service
 {
 public:
 	//! Constructor.
 	PnpUtilService(Poco::Logger& logger);
 	//! Destructor.
-	~PnpUtilService() = default;
+	~PnpUtilService();
 
 public:
-	// Do whatever the service needs to do.
+	//! Do whatever the service needs to do.
 	void run() override;
-
-private:
-	Poco::Logger& logger_;
 };
 
 } // namespace nobsod
